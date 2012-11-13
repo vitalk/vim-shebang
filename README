@@ -1,0 +1,21 @@
+VIM-SHEBANG
+
+Vim filetype detection by the she·bang /SHəˈbaNG/ at file if all built-ins type
+detection mechanisms are failed.
+
+USE
+
+Plugin does not require any configuration. Every time you enter to buffer it
+trying to detect current filetype by shebang at first line. New filetype applied
+to file on success. Use '!#' shortcut to force reset filetype.
+
+Some basic shebang patterns for common languages included in distribution, such
+as python, ruby, different shells. But if that do not covers your needs feel
+free to add your own. For example:
+
+AddShebangPattern! lua ^#!.*/bin/env\s\+lua\>
+
+COPYRIGHT
+
+Copyright © 2012 Vital Kudzelka.
+Use it for Good not Evil.
