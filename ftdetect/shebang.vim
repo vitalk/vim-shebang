@@ -49,7 +49,9 @@ fun! s:shebang()
     endif
     exe 'setfiletype ' . type
   catch
-    call shebang#error(v:exception)
+    if g:shebang_enable_debug
+      call shebang#error(v:exception)
+    endif
   endtry
 endf
 
