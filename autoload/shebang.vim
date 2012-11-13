@@ -50,21 +50,23 @@ endf
 
 fun! shebang#unittest()
   let patterns = {
-        \ '^#!.*\s\+\(ba\|a\|da\|k\|pdk\|mk\)\?sh\>' : 'sh',
-        \ '^#!.*\s\+zsh\>'                           : 'zsh',
-        \ '^#!.*\s\+ruby\>'                          : 'ruby',
-        \ '^#!.*[s]\?bin/ruby'                       : 'ruby',
-        \ '^#!.*\s\+python\>'                        : 'python',
-        \ '^#!.*[s]\?bin/python'                     : 'python',
-        \ '^#!.*\s\+node\>'                          : 'javascript',
+        \ '^#!.*\s\+\(ba\|c\|a\|da\|k\|pdk\|mk\|tc\)\?sh\>' : 'sh',
+        \ '^#!.*\s\+zsh\>'                                  : 'zsh',
+        \ '^#!.*\s\+ruby\>'                                 : 'ruby',
+        \ '^#!.*[s]\?bin/ruby'                              : 'ruby',
+        \ '^#!.*\s\+python\>'                               : 'python',
+        \ '^#!.*[s]\?bin/python'                            : 'python',
+        \ '^#!.*\s\+node\>'                                 : 'javascript',
         \ }
   " shells
   call s:detect_filetype_test('#!/usr/bin/env zsh'    , patterns , 'zsh')
   call s:detect_filetype_test('#!/usr/bin/env sh'     , patterns , 'sh')
+  call s:detect_filetype_test('#!/usr/bin/env csh'    , patterns , 'sh')
   call s:detect_filetype_test('#!/usr/bin/env ash'    , patterns , 'sh')
   call s:detect_filetype_test('#!/usr/bin/env dash'   , patterns , 'sh')
   call s:detect_filetype_test('#!/usr/bin/env ksh'    , patterns , 'sh')
   call s:detect_filetype_test('#!/usr/bin/env pdksh'  , patterns , 'sh')
+  call s:detect_filetype_test('#!/usr/bin/env tcsh'   , patterns , 'sh')
   call s:detect_filetype_test('#!/usr/bin/env mksh'   , patterns , 'sh')
   call s:detect_filetype_test('#!/usr/bin/env bash'   , patterns , 'sh')
   " python

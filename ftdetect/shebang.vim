@@ -58,12 +58,16 @@ endf
 " /usr/bin/interpreter
 " /bin/env interpreter
 " /usr/bin/env interpreter
-AddShebangPattern! sh         ^#!.*\s\+\(ba\|a\|da\|k\|pdk\|mk\)\?sh\>
+" support most of shells: bash, sh, zsh, csh, ash, dash, ksh, pdksh, mksh, tcsh
+AddShebangPattern! sh         ^#!.*\s\+\(ba\|c\|a\|da\|k\|pdk\|mk\|tc\)\?sh\>
 AddShebangPattern! zsh        ^#!.*\s\+zsh\>
+" ruby
 AddShebangPattern! ruby       ^#!.*\s\+ruby\>
 AddShebangPattern! ruby       ^#!.*[s]\?bin/ruby\>
+" python
 AddShebangPattern! python     ^#!.*\s\+python\>
 AddShebangPattern! python     ^#!.*[s]\?bin/python\>
+" js
 AddShebangPattern! javascript ^#!.*\s\+node\>
 
 
