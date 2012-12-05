@@ -33,7 +33,7 @@ fun! s:add_shebang_pattern(filetype, pattern, force) " {{{ add shebang pattern t
 
     let s:shebangs[a:pattern] = a:filetype
   catch
-    call shebang#error("Add shebang filetype: " . v:exception)
+    call shebang#error("Add shebang pattern: " . v:exception)
   endtry
 endf " }}}
 
