@@ -2,7 +2,7 @@
 " Author: Vital Kudzelka
 " Version: 0.1
 " Description: Filetype detection by shebang at file.
-" Last Modified: Nov 13, 2012
+" Last Modified: December 05, 2012
 
 " set default value if not set
 fun! shebang#default(name, default)
@@ -11,8 +11,6 @@ fun! shebang#default(name, default)
   endif
   return {a:name}
 endf
-
-call shebang#default('g:shebang_enable_debug', 0)
 
 " show default error message
 fun! shebang#error(message)

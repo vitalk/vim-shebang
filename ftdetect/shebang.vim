@@ -9,6 +9,9 @@ if exists('g:loaded_shebang') || &cp || version < 700 || did_filetype()
 endif
 let g:loaded_shebang = 1
 
+" swallow error messages if not set
+call shebang#default('g:shebang_enable_debug', 0)
+
 " internal shebang store
 let s:shebangs = {}
 
