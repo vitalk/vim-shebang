@@ -2,19 +2,15 @@
 " Author: Vital Kudzelka
 " Version: 0.1
 " Description: Filetype detection by shebang at file.
-" Last Modified: Nov 13, 2012
+" Last Modified: December 05, 2012
 
-if exists('g:loaded_shebang') || &cp || version < 700
+if exists('g:loaded_shebang') || &cp || version < 700 || did_filetype()
   finish
 endif
-" let g:loaded_shebang = 1
+let g:loaded_shebang = 1
 
 " internal shebang store
 let s:shebangs = {}
-
-if did_filetype()
-  finish
-endif
 
 " Add shebang pattern to filetype
 command! -nargs=* -bang AddShebangPattern
