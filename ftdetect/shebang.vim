@@ -80,9 +80,8 @@ AddShebangPattern! javascript ^#!.*\s\+node\>
 " }}}
 " Key bindings {{{
 
+map <silent> !# :Shebang<CR>
 
-map <silent> <Plug>(shebang-do) :Shebang<CR>
-map <silent> !# <Plug>(shebang-do)
 " }}}
 " Autocommands {{{
 
