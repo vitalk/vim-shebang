@@ -4,24 +4,20 @@
 " Description: Filetype detection by shebang at file.
 " Last Modified: December 05, 2012
 
-" set default value if not set
-fun! shebang#default(name, default)
+
+fun! shebang#default(name, default) " {{{ set default value if not set
   if !exists(a:name)
     let {a:name} = a:default
   endif
   return {a:name}
-endf
-
-" show default error message
-fun! shebang#error(message)
+endf " }}}
+fun! shebang#error(message) " {{{ show error message
   echohl ErrorMsg
   echomsg a:message
   echohl None
-endf
-
-" call function with passed params and compare expected value with returned
-" result
-fun! shebang#test(fn, expected, ...)
+endf " }}}
+fun! shebang#test(fn, expected, ...) " {{{ call function with passed params and
+  " compare expected value with returned result
   if a:0 < 1
     call shebang#error('Test: Expected one more additional param')
     return 1
@@ -41,22 +37,18 @@ fun! shebang#test(fn, expected, ...)
     echomsg 'Returned=' . string(result)
     echomsg 'Expected=' . string(a:expected)
   endif
-endf
-
-" try to detect current filetype
-fun! shebang#detect_filetype(line, patterns)
+endf " }}}
+fun! shebang#detect_filetype(line, patterns) " {{{ try to detect current filetype
   for pattern in keys(a:patterns)
     if a:line =~# pattern
       return a:patterns[pattern]
     endif
   endfor
-endf
-
-fun! s:detect_filetype_test(line, patterns, expected)
-    call shebang#test("shebang#detect_filetype", a:expected, a:line, a:patterns)
-endf
-
-fun! shebang#unittest()
+endf " }}}
+fun! s:detect_filetype_test(line, patterns, expected) " {{{ test
+  call shebang#test("shebang#detect_filetype", a:expected, a:line, a:patterns)
+endf " }}}
+fun! shebang#unittest() " {{{ all tests
   let patterns = {
         \ '^#!.*\s\+\(ba\|c\|a\|da\|k\|pdk\|mk\|tc\)\?sh\>' : 'sh',
         \ '^#!.*\s\+zsh\>'                                  : 'zsh',
@@ -91,4 +83,4 @@ fun! shebang#unittest()
   call s:detect_filetype_test('#!/bin/ruby'           , patterns , 'ruby')
   " javascript
   call s:detect_filetype_test('#!/usr/bin/env node'   , patterns , 'javascript')
-endf
+endf " }}}
