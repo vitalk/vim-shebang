@@ -37,7 +37,7 @@ fun! shebang#test(fn, expected, ...)
   exe cmd
 
   if empty(result) || result !=# a:expected
-    echomsg 'TEST FAILED! on ' . string(a:fn)
+    call shebang#error('TEST FAILED! on ' . string(a:fn))
     echomsg 'Returned=' . string(result)
     echomsg 'Expected=' . string(a:expected)
   endif
