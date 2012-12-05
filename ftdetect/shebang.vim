@@ -1,6 +1,6 @@
 " File: shebang.vim
 " Author: Vital Kudzelka
-" Version: 0.1
+" Version: 0.2
 " Description: Filetype detection by shebang at file.
 " Last Modified: December 05, 2012
 
