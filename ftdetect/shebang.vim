@@ -27,9 +27,9 @@ command! -nargs=* -bang AddShebangPattern
       \ call s:add_shebang_pattern(<f-args>, <bang>0)
 fun! s:add_shebang_pattern(filetype, pattern, ...) " {{{ add shebang pattern to filetype
   if a:0 == 2
-    let [post_hook, force] = [a:1, a:2]
+    let [pre_hook, force] = [a:1, a:2]
   else
-    let [post_hook, force] = ['', a:000[-1]]
+    let [pre_hook, force] = ['', a:000[-1]]
   endif
 
   try
@@ -39,7 +39,7 @@ fun! s:add_shebang_pattern(filetype, pattern, ...) " {{{ add shebang pattern to 
 
     let s:shebangs[a:pattern] = {
           \ 'filetype': a:filetype,
-          \ 'post_hook': post_hook
+          \ 'pre_hook': pre_hook
           \ }
   catch
     call shebang#error("Add shebang pattern: " . v:exception)
@@ -58,8 +58,8 @@ fun! s:shebang() " {{{ set valid filetype based on shebang line
     if empty(match)
       throw "Filetype detection failed for line: '" . line . "'"
     endif
+    exe match.pre_hook
     exe 'setfiletype ' . match.filetype
-    exe match.post_hook
   catch
     if g:shebang_enable_debug
       call shebang#error(v:exception)
