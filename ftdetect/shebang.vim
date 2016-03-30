@@ -76,6 +76,8 @@ endf " }}}
 " /bin/env interpreter
 " /usr/bin/env interpreter
 " support most of shells: bash, sh, zsh, csh, ash, dash, ksh, pdksh, mksh, tcsh
+AddShebangPattern! sh         ^#!.*[s]\?bin/sh\>    let\ b:is_sh=1|if\ exists('b:is_bash')|unlet\ b:is_bash|endif
+AddShebangPattern! sh         ^#!.*[s]\?bin/bash\>  let\ b:is_bash=1|if\ exists('b:is_sh')|unlet\ b:is_sh|endif
 AddShebangPattern! sh         ^#!.*\s\+\(ba\|c\|a\|da\|k\|pdk\|mk\|tc\)\?sh\>
 AddShebangPattern! zsh        ^#!.*\s\+zsh\>
 " ruby
