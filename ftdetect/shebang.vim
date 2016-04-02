@@ -25,13 +25,22 @@ let s:shebangs = {}
 
 command! -nargs=* -bang AddShebangPattern
       \ call s:add_shebang_pattern(<f-args>, <bang>0)
-fun! s:add_shebang_pattern(filetype, pattern, force) " {{{ add shebang pattern to filetype
+fun! s:add_shebang_pattern(filetype, pattern, ...) " {{{ add shebang pattern to filetype
+  if a:0 == 2
+    let [pre_hook, force] = [a:1, a:2]
+  else
+    let [pre_hook, force] = ['', a:000[-1]]
+  endif
+
   try
-    if !a:force && has_key(s:shebangs, a:pattern)
+    if !force && has_key(s:shebangs, a:pattern)
       throw string(a:pattern) . " is already defined, use ! to overwrite."
     endif
 
-    let s:shebangs[a:pattern] = a:filetype
+    let s:shebangs[a:pattern] = {
+          \ 'filetype': a:filetype,
+          \ 'pre_hook': pre_hook
+          \ }
   catch
     call shebang#error("Add shebang pattern: " . v:exception)
   endtry
@@ -45,11 +54,12 @@ fun! s:shebang() " {{{ set valid filetype based on shebang line
       return
     endif
 
-    let type = shebang#detect_filetype(line, s:shebangs)
-    if empty(type)
+    let match = shebang#detect_filetype(line, s:shebangs)
+    if empty(match)
       throw "Filetype detection failed for line: '" . line . "'"
     endif
-    exe 'setfiletype ' . type
+    exe match.pre_hook
+    exe 'setfiletype ' . match.filetype
   catch
     if g:shebang_enable_debug
       call shebang#error(v:exception)
@@ -66,6 +76,8 @@ endf " }}}
 " /bin/env interpreter
 " /usr/bin/env interpreter
 " support most of shells: bash, sh, zsh, csh, ash, dash, ksh, pdksh, mksh, tcsh
+AddShebangPattern! sh         ^#!.*[s]\?bin/sh\>    let\ b:is_sh=1|if\ exists('b:is_bash')|unlet\ b:is_bash|endif
+AddShebangPattern! sh         ^#!.*[s]\?bin/bash\>  let\ b:is_bash=1|if\ exists('b:is_sh')|unlet\ b:is_sh|endif
 AddShebangPattern! sh         ^#!.*\s\+\(ba\|c\|a\|da\|k\|pdk\|mk\|tc\)\?sh\>
 AddShebangPattern! zsh        ^#!.*\s\+zsh\>
 " ruby
