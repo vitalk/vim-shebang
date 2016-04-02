@@ -1,8 +1,6 @@
 " File: shebang.vim
 " Author: Vital Kudzelka
-" Version: 0.1
 " Description: Filetype detection by shebang at file.
-" Last Modified: December 05, 2012
 
 
 fun! shebang#default(name, default) " {{{ set default value if not set
