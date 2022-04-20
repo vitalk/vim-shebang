@@ -79,6 +79,9 @@ AddShebangPattern! sh         ^#!.*[s]\?bin/sh\>    let\ b:is_sh=1|if\ exists('b
 AddShebangPattern! sh         ^#!.*[s]\?bin/bash\>  let\ b:is_bash=1|if\ exists('b:is_sh')|unlet\ b:is_sh|endif
 AddShebangPattern! sh         ^#!.*\s\+\(ba\|c\|a\|da\|k\|pdk\|mk\|tc\)\?sh\>
 AddShebangPattern! zsh        ^#!.*\s\+zsh\>
+" fish
+AddShebangPattern! fish       ^#!.*\s\+fish\>
+AddShebangPattern! fish       ^#!.*[s]\?bin/fish\>
 " ruby
 AddShebangPattern! ruby       ^#!.*\s\+ruby\>
 AddShebangPattern! ruby       ^#!.*[s]\?bin/ruby\>
