@@ -89,7 +89,7 @@ AddShebangPattern! ruby       ^#!.*[s]\?bin/ruby\>
 AddShebangPattern! python     ^#!.*\s\+python\>
 AddShebangPattern! python     ^#!.*[s]\?bin/python\>
 " js
-AddShebangPattern! javascript ^#!.*\s\+node\>
+AddShebangPattern! javascript ^#!.*\s\+node\>   let\ b:compiled_js_files=["ts","cjs","coffee"]\ if\ index(b:compiled_js_files, expand('%:e'))|throw\ "Not javascript."|endif
 
 " }}}
 " Key bindings {{{
